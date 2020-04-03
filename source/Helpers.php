@@ -7,6 +7,10 @@ function site(string $param = null):string {
     return SITE["root"];
 }
 
+function routeImage(string $imageUrl): string {
+    return "https://via.placeholder.com/1280x720.png?text={$imageUrl}";
+}
+
 function asset(string $path): string {
     return SITE["root"]."/views/assets/{$path}";
 }
