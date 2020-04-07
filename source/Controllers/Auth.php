@@ -12,6 +12,31 @@ class Auth extends Controller {
         parent::__construct($router);
     }
 
+    public function login($data):void {
+        $email = filter_var($data["email"], FILTER_VALIDATE_EMAIL);
+        $passwd = filter_var($data["passwd"], FILTER_DEFAULT);
+
+        if (!$email || !$passwd) {
+            echo $this->ajaxResponse("message", [
+               "type" => "alert",
+               "message" => "Dados inválidos, preencha corretamente"
+            ]);
+            return;
+        }
+
+        $user = (new User())->find("email = :e", "e={$email}")->fetch();
+        if (!$user || !password_verify($passwd, $user->passwd)) {
+            echo $this->ajaxResponse("message", [
+                "type" => "error",
+                "message" => "Login ou Senha inválido"
+            ]);
+            return;
+        }
+
+        $_SESSION["user"] = $user->id;
+        echo $this->ajaxResponse("redirect", ["url" => $this->router->route("app.home")]);
+    }
+
     public function register($data): void {
         $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
 
@@ -23,37 +48,24 @@ class Auth extends Controller {
             return;
         }
 
-        if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
-            echo $this->ajaxResponse("message", [
-                "type" => "error",
-                "message" => "Informar um e-mail válido para continuar"
-            ]);
-            return;
-        }
-
-        $check_user_email = (new User())->find("email = :e", "e={$data["email"]}")->count();
-        if ($check_user_email) {
-            echo $this->ajaxResponse("message", [
-                "type" => "error",
-                "message" => "E-mail já cadastrado no sistema"
-            ]);
-            return;
-        }
-
         $user = new User();
         $user->first_name = $data["first_name"];
         $user->last_name = $data["last_name"];
         $user->email = $data["email"];
-        $user->passwd = password_hash($data["passwd"], PASSWORD_DEFAULT);
+        $user->passwd = $data["passwd"];
 
-        $user->save();
+        if (!$user->save()) {
+            echo $this->ajaxResponse("message", [
+               "type" => "error",
+               "message" => $user->fail()->getMessage()
+            ]);
+            return;
+        }
+
         $_SESSION["user"] = $user->id;
-
         echo $this->ajaxResponse("redirect", [
            "url" => $this->router->route("app.home")
         ]);
-
-        echo json_encode($data);
     }
 
 }
