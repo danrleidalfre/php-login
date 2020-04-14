@@ -34,7 +34,14 @@ define("SOCIAL", [
     "twitter_site" => "@danrleidalfre"
 ]);
 
-define("MAIL", []);
+define("MAIL", [
+    "host" => "br976.hostgator.com.br",
+    "port" => "587",
+    "user" => "danrlei@dalfre.com",
+    "passwd" => "",
+    "from_name" => "Danrlei Dal Fré",
+    "from_email" => "danrlei@dalfre.com"
+]);
 
 define("FACEBOOK_LOGIN", []);
 
