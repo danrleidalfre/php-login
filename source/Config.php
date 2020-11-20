@@ -4,7 +4,7 @@ define("SITE", [
     "desc" => "Página de login com Facebook, Google e E-mail",
     "domain" => "localhost",
     "locale" => "pt_BR",
-    "root" => "https://localhost/Server/login/"
+    "root" => "https://localhost/php-login/"
 ]);
 
 if ($_SERVER["SERVER_NAME"] == "localhost") {
@@ -26,14 +26,6 @@ define("DATA_LAYER_CONFIG", [
     ]
 ]);
 
-define("SOCIAL", [
-    "facebook_page" => "danrleidalfre",
-    "facebook_author" => "danrleidalfre",
-    "facebook_appId" => "1150801045099669",
-    "twitter_creator" => "@danrleidalfre",
-    "twitter_site" => "@danrleidalfre"
-]);
-
 define("MAIL", [
     "host" => "br976.hostgator.com.br",
     "port" => "587",
@@ -41,17 +33,4 @@ define("MAIL", [
     "passwd" => "",
     "from_name" => "Danrlei Dal Fré",
     "from_email" => "danrlei@dalfre.com"
-]);
-
-define("FACEBOOK_LOGIN", [
-    "clientId" => "1150801045099669",
-    "clientSecret" => "5d0ef46699c210ec561f1c53b0ce8054",
-    "redirectUri" => SITE['root'] . "/facebook",
-    "graphApiVersion" => "v4.0"
-]);
-
-define("GOOGLE_LOGIN", [
-    "clientId" => "852905684935-fii2fv3o0vbakri3dlojphvmq08f84ku.apps.googleusercontent.com",
-    "clientSecret" => "fV3wamHcjlZDGp0Tujfcw-8C",
-    "redirectUri" => SITE['root'] . "/google"
 ]);

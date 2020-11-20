@@ -158,16 +158,4 @@ class Auth extends Controller {
         ]);
     }
 
-    public function facebook(): void {
-        $facebook = new Facebook(FACEBOOK_LOGIN);
-        $error = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
-        $code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED);
-
-        if (!$error && !$code) {
-            $auth_url = $facebook->getAuthorizationUrl(["scope" => "email"]);
-            header("Location: {$auth_url}");
-            return;
-        }
-    }
-
 }

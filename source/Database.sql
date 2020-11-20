@@ -5,8 +5,6 @@ create table users
     last_name varchar(255) not null,
     email varchar(255) not null,
     passwd varchar(255) not null,
-    facebook_id varchar(30) null,
-    google_id varchar(30) null,
     photo varchar(255) null,
     forget varchar(255) null,
     created_at timestamp null,

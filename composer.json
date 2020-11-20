@@ -26,8 +26,6 @@
     "coffeecode/optimizer": "2.0.0",
     "phpmailer/phpmailer": "6.0.7",
     "league/plates": "v4.0.0-alpha",
-    "league/oauth2-facebook": "2.0.1",
-    "league/oauth2-google": "3.0.2",
     "matthiasmullie/minify": "1.3.*"
   }
 }
